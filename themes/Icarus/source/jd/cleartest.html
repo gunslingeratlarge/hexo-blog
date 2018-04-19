@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style>
+        .father {
+            background: #00ff00;
+            width:300px;
+
+        }
+
+        .son1 {
+            background: red;
+            width: 56px;
+            height: 48px;
+        }
+
+        .son2{
+            background: blue;
+            width: 60px;
+            height: 50px;
+        }
+
+        .test {
+            background: darkmagenta;
+            height: 300px;
+            width: 300px;
+        }
+
+        .clearfix:after{
+            content:" ";
+            display: block;
+            visibility: hidden;
+            height:0;
+            line-height:0;
+            clear:both;
+        }
+    </style>
+</head>
+<body>
+    <div class="father clearfix">
+        <div class="son1" style="float:left;">
+        </div>
+        <div class="son2" style="float:left;"></div>
+    </div>
+
+    <div class="test">
+    </div>
+</body>
+</html>

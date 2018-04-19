@@ -24,7 +24,7 @@ customize:
         author_title: Blockchain & Web development 
         location: Shanghai, China
         follow: https://github.com/gunslingeratlarge
-    highlight: monokai
+    highlight: atelier-estuary-light
     sidebar: right # sidebar position, options: left, right or leave it empty
     thumbnail: false # enable posts thumbnail, options: true, false
     favicon: # path to favicon

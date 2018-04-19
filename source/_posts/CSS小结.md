@@ -1,0 +1,178 @@
+title: CSS小结
+author: gsal
+tags:
+  - css
+  - 前端
+categories:
+  - 前端
+date: 2018-04-19 20:29:00
+---
+[京东首页](/jd/index/html)
+
+CSS
+
+- 元素的分类
+  - 块元素（独占一行：包括div、p、ul、li、h1-h6）
+    - 可以设置宽高
+    - 嵌套下，子元素宽度和父块元素宽度默认一致
+    - 独占一行
+  - 行内元素 span、a、strong、em、del、ins
+    - 在一行上显示
+    - 不能直接设置宽高
+    - 元素的宽高就是内容撑开的宽高
+      - 因此text-align:center（对元素的内容居中）无效了
+    - 仍在父级元素内自适应
+      <!--more-->
+  - 行内块元素 外在inline，内在为块，image，input
+    - 在一行上显示
+    - 可以设置宽高
+- 元素之间的转换
+  - 块元素转行内元素：display:inline;
+  - 行内块元素转块元素：display:block;
+  - 块和行内元素转行内块元素：display:inline-block;
+    - 使用场景：想将块元素和行内元素都放在一行，还想定义宽高，将他们都转成行内块元素（最常用）
+- 样式表的优先级
+  - 继承和默认为0
+  - 标签选择器优先级为1
+  - 类选择器为10
+  - id选择器为100
+  - 行内样式为1000
+  - !important 为1000以上
+  - 注意权重会叠加，如div p .span就为1+1+10 = 12
+- 链接伪类
+  - a:visited访问之后的状态
+  - a:hover滑过的状态
+  - a:active激活的状态
+  - :focus获取到焦点的状态如input:focus
+  - 去除下划线：text-decoration:none; (underline, line-through)
+- 背景属性
+  - background-color
+  - background-image:url("1.png")
+  - background-repeat:no-repeat,repeat-x, repeat-y,repeat
+  - background-position:left right center top bottom
+    - 当你只写一个值的时候，另一个值就居中（不居中，难道默认值为left或top？所以只能默认居中为最好的情况），如写right，则是到最右边的中间位置，即right center。
+    - 写两个具体值是水平方向，垂直方向，只写一个代表水平方向
+  - background-attachment： scroll fixed 背景是否滚动
+    - 如果此值为fixed的话，那么它的position是基于浏览器窗口的，不再以元素来定位了
+- 行高
+  - 浏览器默认文字大小16px
+  - 行高 = 基线与基线之间的距离
+  - 行高 = 文字高度 + 上下边距(注意这个上下边距跟外边距没关系)，这里讲的行高就是文字content的高度
+  - 一行文字行高和父元素高度一致的时候，垂直居中显示（a标签中文字是a这个标签的子元素，所以可以用text-align作用在子元素上）
+  - 行高的单位
+  - 有父元素时行高
+  - 推荐行高使用像素为单位
+  - line-height与height的区别
+    - 一行文字总是在line-height的中间的，而height只是设置某个元素的高度，文字还是左上放的
+    - 设置line-height为50
+    - 设置height为50
+- 盒子模型
+  - 边框合并
+    - border-collapse:collapse;
+    - 将table的边框合并，结合<table cellspacing="0"> 使用
+  - 继承的盒子一般不会被撑大
+    - 包含（嵌套）的盒子，如果子盒子没有定义宽度，给子盒子设置左右内边距，一般不会撑大盒子。
+    - css世界中流的概念，只会填充满父级容器而不会溢出
+    - 在高度方向上就可以撑大（就算外面的盒子已经设置了高度也会被撑大）
+  - 盒子与盒子之间的居中对齐用margin:0 auto;
+  - 标签中内容的居中对齐用text-align:center;
+    - 规范中的text-align:center是用来居中行内元素或者是自身的内容的，但是ie7/8也可以用来对齐块级元素
+    - text-align:center; 这个属性也具有继承性
+  - 外边距margin
+    - 两个盒子垂直一个设置上外边距，一个设置下外边距，取的设置较大的值
+    - 嵌套的盒子外边距塌陷
+      - 嵌套的盒子，直接给子盒子设置垂直外边距的时候，会发生外边距塌陷
+      - 解决方法
+        - 1、给父盒子设置边框
+        - 2、给父元素设置overflow:hidden;
+    - 行内元素不要给上下的margin 和padding
+      - 上下margin和padding会被忽略
+      - 左右margin和padding会起作用
+- 浮动
+  - 浮动原理
+    - 清除body的margin可以消除空白边缘： body {margin:0;}
+    - 浮动的盒子脱离标准流，并且在一行上显示
+    - 行内元素浮动后变为行内块元素（不推荐使用）
+    - 浮动的盒子一般要给宽，要不然容易掉下来
+  - 浮动作用
+    - 文本绕图
+      - 对图片左浮动，然后p会环绕图片
+      - 图片的浮动是不会盖住文字的（本来就是为了用浮动解决文本绕图的问题）
+    - 制作导航
+      - 使用ul、li完成导航而非将a转成行内块
+      - margin：没有背景色 padding：有背景色
+    - 网页布局
+      - 一个左浮动一个右浮动
+  - 清除浮动
+    - 当父盒子没有定义高度，子盒子浮动之后，下面的元素发生位置错误
+    - 方法
+      - 额外标签法：在最后一个浮动元素后添加标签<div style="clear:both;></div>
+      - 给浮动的父级元素使用 overflow: hidden;
+        - 将溢出隐藏，所以就给了高度以容纳子元素？
+        - 如果有内容在盒子之外，不能使用了。因为会把盒子之外的内容裁掉
+      - 伪元素清除浮动 给父级元素以.clearfix类
+        - .clearfix:after { display:block; height:0; line-height:0; visibility:hidden；clear:both;}
+        - .clearfix {zoom:1} 兼容ie浏览器
+- css初始化
+  - 直接复制粘贴别人的即可
+- Overflow
+  - visible：默认值，内容不会修剪，会呈现在元素之外
+  - hidden：内容会被修剪
+  - scroll：内容出了盒子会隐藏，但是会显示滚动条
+  - auto:  能滚才有滚动条，scorll一定有两个滚动条
+- 定位 left,right,top,bottom:100px; 表示位置信息
+  - 静态定位 position: static; 默认值
+  - 绝对定位: position:absolute;
+    - 不占据原来的位置（脱标）
+    - left等等属性有用了，是关于浏览器（这个浏览器页面而非浏览器窗口，滚动是会消失的）的位置
+    - 嵌套的盒子，父盒子没有使用定位，子盒子绝对定位，子盒子位置从浏览器出发
+    - 嵌套的盒子，父盒子使用定位，子盒子绝对定位，子盒子从父元素出发
+    - 使用绝对定位之后，行内元素转成了行内块元素（z-index 调整元素的层叠顺序，默认值0-999，越大越在上面 ）
+      - 行内元素脱标之后都会转成行内块（个人认为）
+    - div不会再流动地填满整个父级元素了
+  - 相对定位：position:relative;
+    - 位置从自己原来的位置出发，相对指的是相对于自己
+    - 还占据原来的位置
+    - 子绝父相（父元素相对定位，子元素绝对定位）——工作中用得最多
+      - 父相对定位不脱标，子元素按照父元素位置出发
+  - 固定定位：fixed
+    - 一直在浏览器窗口，无视滚动
+    - 不占据原有位置，脱标
+    - 行内元素转换为行内块元素
+  - 其他一些问题
+    - 定位的盒子居中显示
+      - margin: 0 auto;只能让不脱标的盒子居中
+      - left:50%; margin-left:-480px;
+      - 即向右走父元素宽度的50%,向左走自身宽度的一半（这里自身宽度为960px）
+      - 不同的分辨率也可适配
+- 标签包含规范
+  - div可以包含所有的标签。
+  - p标签不能包含div h1等标签
+  - h1可以包含p，div等标签
+  - 行内元素尽量包含行内元素，行内元素不要包含块元素
+- 规避脱标流
+  - 能用流的尽量用流，不行再用浮动，再不行使用定位
+  - margin-left:auto; 小技巧可以把盒子左边距设到最大，往右边冲
+- 图片和文字的垂直居中对齐
+  - vertical-align：主要是使用在行内块上。默认属性是：baseline
+  - 只需要把图片的vertical-align改为middle，bottom，top就可以解决了
+- css可见性
+    - overflow:hidden；溢出隐藏
+    - 可以用纯css做标签页的切换，就是使用这个结合锚点。 通过点击a标签业内跳转到不同的id，然后由于父级盒子只能显示一个且设置了overflow:hidden;因此只显示一个div
+
+    - visibility:hidden；隐藏元素，隐藏之后还占据原来位置
+
+    - display:none；隐藏元素，隐藏后不占据原来的位置
+
+    - display:block；显示元素
+
+    - 后两者常配合js使用，如下拉菜单
+
+- 内容移出
+  - 可以将a的内容移出不显示，但是仍然在html中，对seo就比较友好了
+  - 方法
+    - 对a display: inline-block; text-indent:-5000em;
+    - div {height:0px; width:300px; background:red; padding-top:100px; overflow:hidden;}则div中的内容不会显示出来，因为高度为0且溢出隐藏，但是盒子又能显示，因为有一个上padding
+- 精灵图
+  - 将小图标放到一张图上，避免多次加载
+  - 通过使用bg的不同位置来确定图片
