@@ -10,6 +10,8 @@ date: 2018-06-20 20:31:00
 在resources文件夹下添加`datasource.properites`文件，对应properties中的属性写一个pojo。这个pojo将被注入，pojo上不用加@Component标注，因为我们等下用JavaConfig的方式统一进行。    
 写一个Config类，比如叫PropertyConfig，加@Configuration，加@PropertySource("classpath:datasource.properties")，并配置一个PropertySourcesPlaceholderConfigurer，注意其@Bean的方法要是静态方法。为什么我也不知道，不是静态方法就会报错。  
 思路是这样的，PropertySourcesPlaceholderConfigurer读取配置文件，并生成键值对，而Config类中的属性通过`@Value(${user})`的形式取得键值对的值，并注入到自己的变量中，而刚才写的那个pojo可以拿到这些值并注册到Spring容器中。
+<!--more-->
+
 
 ## 示例代码
 ``` java
