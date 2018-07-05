@@ -1,9 +1,9 @@
 title: javafx
 author: gsal
 tags:
-  - Java
   - javafx
   - gui
+  - java
 categories:
   - java
 date: 2018-05-28 21:19:00

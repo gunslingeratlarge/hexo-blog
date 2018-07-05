@@ -5,7 +5,7 @@ tags:
   - python
 categories:
   - 机器学习
-date: 2018-06-25 20:38:00
+date: 2018-06-26 15:44:00
 ---
 # Neural Network Cheat Sheet
 @(Machine Learning By Andrew Ng)[机器学习]
@@ -13,15 +13,16 @@ date: 2018-06-25 20:38:00
 Theano与Tensorflow是两个Deep Learning的库，而Keras在这两个库的基础之上使得我们构建深度神经网络更加地方便和容易。不然就要写很多行代码啦。
 ### 安装
 通过conda安装非常方便，`conda install tensorflow`,`conda install theano`,`conda install keras`,现在凡是深度学习我感觉都会用这三个包，感觉像是三板斧一样。    
-通过conda安装可能由于是国外的源比较慢，因此可以换清华大学的源。  
-<!--more-->
+通过conda安装可能由于是国外的源比较慢，因此可以换清华大学的源。  
+
+
 ```
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 conda config --set show_channel_urls yes 
 ```
 可以通过~/.condarc查看是否更换源成功。换源之后就能够下得飞快了。  
-
+<!--more-->
 ## 预处理
 在正式构建神经网络之前，我们需要对数据进行预处理，包括将categorical variable改成dummy variable，并且要去掉一行dummy variable以免落入one hot encoder的陷阱。以及feature-scaling和train-test-split等等。  
 对于预处理我们也有自己的模板。    
